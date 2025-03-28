@@ -1,0 +1,40 @@
+<main>
+ <p id="notice"></p>
+ <div class="container px-5 px-sm-0">
+  <div class="row">
+
+    <%= render 'user_info_and_new_book', user: @user, book: Book.new %>
+
+    <div class="col-md-8 offset-md-1">
+     <h2>Users</h2>
+     <table class="table table-hover table-inverse">
+     <thead>
+      <tr>
+        <th>image</th>
+        <th>name</th>
+        <th></th>
+      </tr>
+     </thead>
+     <tbody>
+     <% @users.each do |user| %>
+      <tr>
+        <td>
+         <%= link_to user_path(user) do %>
+          <% if user.profile_image.attached? %>
+           <%= image_tag user.profile_image.variant(resize: "80x80"), alt: "User Image" %>
+          <% else %>
+           <%= image_tag "no_image.jpg", size: "80x80", alt: "No Image" %>
+          <% end %>
+         <% end %>
+        </td>
+        <td><%= user.name %></td>
+        <td><%= link_to "Show", user_path(user) %></td>
+      </tr>
+     <% end %>
+     </tbody>
+     </table>
+    </div>
+  </div>
+</main>
+
+

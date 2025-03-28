@@ -1,0 +1,44 @@
+<main>
+<p id="notice"></p>
+<div class="container">
+ <div class="row">
+
+   <%= render 'book_info', book: @book %>
+
+  <div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+  <table class="table">
+    <tbody>
+      <tr>
+       <td>
+        <%= link_to user_path(@book.user) do %>
+         <% if @book.user.profile_image.attached? %>
+          <%= image_tag @book.user.profile_image.variant(resize: "100x100"), alt: "User Image" %>
+         <% else %>
+          <%= image_tag 'no_image.jpg', size: "100x100", alt: "No Image" %>
+         <% end %>
+        <% end %>
+       <br>
+        <%= link_to @book.user.name, user_path(@book.user) %>
+       </td>
+       <td>
+       <%= link_to @book.title, book_path(@book), class: "book-link" %>
+       </td>
+       <td><%= @book.body %></td>
+
+        <% if @book.user == current_user %>
+         <td>
+          <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %>
+         </td>
+         <td>
+          <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "本当に消しますか？" } %>
+         </td>
+        <% end %>
+       </tr>
+    </tbody>
+  </table>
+</div>
+
+   
+   
+
